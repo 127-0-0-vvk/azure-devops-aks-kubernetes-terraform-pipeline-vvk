@@ -96,6 +96,7 @@ stages:
                   environmentServiceNameAzureRM: 'terraform-aks-azurerm-svc-con'
 
     - deployment: DeployDQAAKSCluster
+      dependsOn: DeployDevAKSCluster
       displayName: DeployQAAKSCluster
       pool:
         vmImage: 'ubuntu-latest'
