@@ -17,7 +17,7 @@ stages:
           artifact: 'terraform-manifests-out'
           publishLocation: 'pipeline'
       
-      - task: TerraformInstaller@1
+      - task: ms-devlabs.custom-terraform-tasks.custom-terraform-installer-task.TerraformInstaller@0
         inputs:
           terraformVersion: 'latest'
       
