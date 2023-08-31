@@ -76,20 +76,22 @@ stages:
                   backendAzureRmContainerName: 'tfstatefiles'
                   backendAzureRmKey: 'aks-$(DEV_ENVIRONMENT).tfstate'
                   allowTelemetryCollection: false
-                
-               - task: TerraformCLI@0
-                 displayName: Terraform Plan
+
+
+               - task: TerraformTaskV4@4
                  inputs:
-                  command: 'plan'
-                  workingDirectory: '$(Pipeline.Workspace)/terraform-manifests-out'
-                  commandOptions: '-var ssh_public_key=$(sshkey.secureFilePath) -var environment=$(DEV_ENVIRONMENT) -out $(Pipeline.Workspace)/terraform-manifests-out/$(DEV_ENVIRONMENT)-$(Build.BuildId).out'
-                  allowTelemetryCollection: false
-                  
+                   provider: 'azurerm'
+                   command: 'plan'
+                   workingDirectory: '$(Pipeline.Workspace)/terraform-manifests-out'
+                   commandOptions: '-var ssh_public_key=$(sshkey.secureFilePath) -var environment=$(DEV_ENVIRONMENT) -out $(Pipeline.Workspace)/terraform-manifests-out/$(DEV_ENVIRONMENT)-$(Build.BuildId).out'
+                   environmentServiceNameAzureRM: 'terraform-aks-azurerm-svc-con'
               
-               - task: TerraformCLI@0
-                 displayName: Terraform Apply
+                 
+               - task: TerraformTaskV4@4
                  inputs:
+                  provider: 'azurerm'
                   command: 'apply'
                   workingDirectory: '$(Pipeline.Workspace)/terraform-manifests-out'
                   commandOptions: '$(Pipeline.Workspace)/terraform-manifests-out/$(DEV_ENVIRONMENT)-$(Build.BuildId).out'
-                  allowTelemetryCollection: true
+                  environmentServiceNameAzureRM: 'terraform-aks-azurerm-svc-con'
+            
