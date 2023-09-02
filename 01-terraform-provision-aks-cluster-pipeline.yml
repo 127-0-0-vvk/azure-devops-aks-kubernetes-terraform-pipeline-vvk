@@ -96,20 +96,17 @@ stages:
                   environmentServiceNameAzureRM: 'terraform-aks-azurerm-svc-con'
 
 - stage: Build
-  displayName: Build and push stage
+  displayName: Build and Push Stage
   jobs:
-  - job: Build
-    displayName: Build
-    pool:
-      vmImage: $(vmImageName)
-    steps:
-    - task: Docker@2
-      displayName: Build and push an image to container registry
-      inputs:
-        command: buildAndPush
-        repository: $(imageRepository)
-        dockerfile: $(dockerfilePath)
-        containerRegistry: $(dockerRegistryServiceConnection)
-        tags: |
-          $(tag)
+    - job: Build
+      displayName: Build
+      pool: 
+        vmImage: $(vmImageName)
+      steps:
+        - task: Docker@2
+          inputs:
+            containerRegistry: 'acrrg01'
+            repository: 'nginx-app1'
+            command: 'buildAndPush'
+            Dockerfile: '**/Dockerfile'
        
