@@ -1,0 +1,19 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: napp1nginxaks 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: napp1nginxaks
+  template:
+    metadata:
+      labels:
+        app: napp1nginxaks 
+    spec:
+      containers:
+        - name: napp1nginxaks 
+          image: acrrg01.azurecr.io/napp1nginxaks
+          ports:
+          - containerPort: 80
