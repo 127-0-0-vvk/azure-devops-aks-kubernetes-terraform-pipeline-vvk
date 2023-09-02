@@ -6,10 +6,17 @@ pool:
   
 # Define Variable for Environments
 variables:
-- name: DEV_ENVIRONMENT
-  value: dev
-- name: QA_ENVIRONMENT
-  value: qa
+- name: INFRA_DEPLOY
+  value: infra
+  
+  # Container registry service connection established during pipeline creation
+  dockerRegistryServiceConnection: '8d947662-a7bf-4db0-9797-fd954aae37f6'
+  imageRepository: 'vvkazuredevopsakskubernetesterraformpipelinevvk'
+  containerRegistry: 'acrrg01.azurecr.io'
+  dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
+  tag: '$(Build.BuildId)'
+
+
 
 stages:
 - stage: TerraformValidate
@@ -53,7 +60,7 @@ stages:
       displayName: DeployDevAKSCluster
       pool:
         vmImage: 'ubuntu-latest'
-      environment: $(DEV_ENVIRONMENT)      
+      environment: $(INFRA_DEPLOY)      
       strategy:
         runOnce:
           deploy:
@@ -74,7 +81,7 @@ stages:
                   backendAzureRmResourceGroupName: 'terraform-storage-rg'
                   backendAzureRmStorageAccountName: 'terraformstatestoragevvk'
                   backendAzureRmContainerName: 'tfstatefiles'
-                  backendAzureRmKey: 'aks-$(DEV_ENVIRONMENT).tfstate'
+                  backendAzureRmKey: 'aks-$(INFRA_DEPLOY).tfstate'
                   allowTelemetryCollection: false
 
 
@@ -83,7 +90,7 @@ stages:
                    provider: 'azurerm'
                    command: 'plan'
                    workingDirectory: '$(Pipeline.Workspace)/terraform-manifests-out'
-                   commandOptions: '-var ssh_public_key=$(sshkey.secureFilePath) -var environment=$(DEV_ENVIRONMENT) -out $(Pipeline.Workspace)/terraform-manifests-out/$(DEV_ENVIRONMENT)-$(Build.BuildId).out'
+                   commandOptions: '-var ssh_public_key=$(sshkey.secureFilePath) -var environment=$(INFRA_DEPLOY) -out $(Pipeline.Workspace)/terraform-manifests-out/$(INFRA_DEPLOY)-$(Build.BuildId).out'
                    environmentServiceNameAzureRM: 'terraform-aks-azurerm-svc-con'
               
                  
@@ -92,7 +99,24 @@ stages:
                   provider: 'azurerm'
                   command: 'apply'
                   workingDirectory: '$(Pipeline.Workspace)/terraform-manifests-out'
-                  commandOptions: '$(Pipeline.Workspace)/terraform-manifests-out/$(DEV_ENVIRONMENT)-$(Build.BuildId).out'
+                  commandOptions: '$(Pipeline.Workspace)/terraform-manifests-out/$(INFRA_DEPLOY)-$(Build.BuildId).out'
                   environmentServiceNameAzureRM: 'terraform-aks-azurerm-svc-con'
 
-        
+- stage: Build
+  displayName: Build and push stage
+  jobs:
+  - job: Build
+    displayName: Build
+    pool:
+      vmImage: $(vmImageName)
+    steps:
+    - task: Docker@2
+      displayName: Build and push an image to container registry
+      inputs:
+        command: buildAndPush
+        repository: $(imageRepository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(dockerRegistryServiceConnection)
+        tags: |
+          $(tag)
+       
