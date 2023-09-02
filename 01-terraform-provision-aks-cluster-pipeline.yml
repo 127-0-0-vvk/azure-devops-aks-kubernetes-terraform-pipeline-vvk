@@ -95,16 +95,3 @@ stages:
                   commandOptions: '$(Pipeline.Workspace)/terraform-manifests-out/$(INFRA_DEPLOY)-$(Build.BuildId).out'
                   environmentServiceNameAzureRM: 'terraform-aks-azurerm-svc-con'
 
-- stage: Build
-  displayName: Build and Push Stage
-  jobs:
-    - job: Build
-      displayName: Build
-      steps:
-        - task: Docker@2
-          inputs:
-            containerRegistry: 'acrrg01'
-            repository: 'nginx-app1'
-            command: 'buildAndPush'
-            Dockerfile: '**/Dockerfile'
-       
