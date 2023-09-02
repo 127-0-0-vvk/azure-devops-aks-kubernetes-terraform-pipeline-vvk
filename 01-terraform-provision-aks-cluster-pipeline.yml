@@ -9,13 +9,6 @@ variables:
 - name: INFRA_DEPLOY
   value: infra
   
-  # Container registry service connection established during pipeline creation
-  dockerRegistryServiceConnection: '8d947662-a7bf-4db0-9797-fd954aae37f6'
-  imageRepository: 'vvkazuredevopsakskubernetesterraformpipelinevvk'
-  containerRegistry: 'acrrg01.azurecr.io'
-  dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
-  tag: '$(Build.BuildId)'
-
 
 
 stages:
