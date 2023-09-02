@@ -47,9 +47,9 @@ stages:
           command: 'validate'
           workingDirectory: '$(System.DefaultWorkingDirectory)/terraform-manifests'
           
-- stage: DeployAKSClusters
+- stage: DeployAKS_ACR_Clusters
   jobs:
-    - deployment: DeployDevAKSCluster
+    - deployment: DeployDevAKS_ACR_Cluster
       displayName: DeployDevAKSCluster
       pool:
         vmImage: 'ubuntu-latest'
