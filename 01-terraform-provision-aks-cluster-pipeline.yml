@@ -101,7 +101,7 @@ stages:
     - job: Build
       displayName: Build
       pool: 
-        vmImage: $(vmImageName)
+        vmImage: $(vmImage)
       steps:
         - task: Docker@2
           inputs:
