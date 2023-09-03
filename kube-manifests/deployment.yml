@@ -18,7 +18,7 @@ spec:
         app: "nextjs-app"
     spec:
       containers:
-        - image: acrrg01.azurecr.io/nextjs-app1:179:#{Build.BuildId}#
+        - image: acrrg01.azurecr.io/nextjs-app1:#{Build.BuildId}#
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
