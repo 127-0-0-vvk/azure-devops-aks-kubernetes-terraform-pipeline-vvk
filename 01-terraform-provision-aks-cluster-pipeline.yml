@@ -1,4 +1,4 @@
-
+trigger:
 
 
 pool:
@@ -105,9 +105,10 @@ stages:
     steps:
       - task: replacetokens@5
         inputs:
-          targetFiles: '**/*.config'
+          rootDirectory: '$(Build.SourcesDirectory)/src/MyHealth.Web/'
+          targetFiles: 'appsettings.json'
           encoding: 'auto'
-          tokenPattern: 'default'
+          tokenPattern: 'rm'
           writeBOM: true
           actionOnMissing: 'warn'
           keepToken: false
@@ -118,9 +119,10 @@ stages:
           enableTelemetry: true
       - task: replacetokens@5
         inputs:
-          targetFiles: '**/*.config'
+          rootDirectory: '$(Build.SourcesDirectory)/'
+          targetFiles: 'mhc-aks-yaml'
           encoding: 'auto'
-          tokenPattern: 'default'
+          tokenPattern: 'rm'
           writeBOM: true
           actionOnMissing: 'warn'
           keepToken: false
@@ -130,33 +132,53 @@ stages:
           useLegacyPattern: false
           enableTelemetry: true
       
-      - task: DockerCompose@0
-        inputs:
-          containerregistrytype: 'Azure Container Registry'
-          dockerComposeFile: '**/docker-compose.yml'
-          action: 'Run a Docker Compose command'
       
       - task: DockerCompose@0
         inputs:
           containerregistrytype: 'Azure Container Registry'
-          dockerComposeFile: '**/docker-compose.yml'
-          action: 'Run a Docker Compose command'
+          azureSubscription: 'terraform-aks-azurerm-svc-con'
+          azureContainerRegistry: '{"loginServer":"acrrg01.azurecr.io", "id" : "/subscriptions/83afe2ee-77f7-486b-a72e-6723cddc49ca/resourceGroups/terraform-aks-base/providers/Microsoft.ContainerRegistry/registries/acrrg01"}'
+          dockerComposeFile: 'docker-compose.ci.build.yml'
+          dockerComposeFileArgs: 'DOCKER_BUILD_SOURCE='
+          action: 'Run services'
+          detached: false
       - task: DockerCompose@0
         inputs:
           containerregistrytype: 'Azure Container Registry'
+          azureSubscription: 'terraform-aks-azurerm-svc-con'
+          azureContainerRegistry: '{"loginServer":"acrrg01.azurecr.io", "id" : "/subscriptions/83afe2ee-77f7-486b-a72e-6723cddc49ca/resourceGroups/terraform-aks-base/providers/Microsoft.ContainerRegistry/registries/acrrg01"}'
           dockerComposeFile: '**/docker-compose.yml'
-          action: 'Run a Docker Compose command'
+          dockerComposeFileArgs: 'DOCKER_BUILD_SOURCE='
+          action: 'Build services'
+          additionalImageTags: '$(build.buildid)'
       
       - task: DockerCompose@0
         inputs:
           containerregistrytype: 'Azure Container Registry'
+          azureSubscription: 'terraform-aks-azurerm-svc-con'
+          azureContainerRegistry: '{"loginServer":"acrrg01.azurecr.io", "id" : "/subscriptions/83afe2ee-77f7-486b-a72e-6723cddc49ca/resourceGroups/terraform-aks-base/providers/Microsoft.ContainerRegistry/registries/acrrg01"}'
           dockerComposeFile: '**/docker-compose.yml'
-          action: 'Run a Docker Compose command'
+          dockerComposeFileArgs: 'DOCKER_BUILD_SOURCE='
+          action: 'Push services'
+          additionalImageTags: '$(build.buildid)'
       
+
+      - task: DockerCompose@0
+        inputs:
+            containerregistrytype: 'Azure Container Registry'
+            azureSubscription: 'terraform-aks-azurerm-svc-con'
+            azureContainerRegistry: '{"loginServer":"acrrg01.azurecr.io", "id" : "/subscriptions/83afe2ee-77f7-486b-a72e-6723cddc49ca/resourceGroups/terraform-aks-base/providers/Microsoft.ContainerRegistry/registries/acrrg01"}'
+            dockerComposeFile: '**/docker-compose.yml'
+            dockerComposeFileArgs: 'DOCKER_BUILD_SOURCE='
+            action: 'Lock services'
+            outputDockerComposeFile: '$(Build.StagingDirectory)/docker-compose.yml'
       - task: CopyFiles@2
         inputs:
-          Contents: '**'
-          TargetFolder: 
+          SourceFolder: '$(Agent.BuildDirectory)'
+          Contents: |
+            **/mhc-aks-yaml
+            **/*.dacpac
+          TargetFolder: '$(Build.ArtifactStagingDirectory)'
       
       - task: PublishBuildArtifacts@1
         inputs:
