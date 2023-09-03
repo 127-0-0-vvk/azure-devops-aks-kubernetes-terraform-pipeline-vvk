@@ -120,6 +120,9 @@ stages:
         repository: 'nextjs-app1'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
+        tags: |
+          latest
+          $(Build.BuildId)
     
     - task: CopyFiles@2
       inputs:
