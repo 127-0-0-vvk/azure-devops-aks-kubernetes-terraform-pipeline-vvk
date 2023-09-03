@@ -7,7 +7,7 @@ pool:
 # Define Variable for Environments
 variables:
 - name: INFRA_DEPLOY
-  value: infra
+  value: base
   
 
 stages:
