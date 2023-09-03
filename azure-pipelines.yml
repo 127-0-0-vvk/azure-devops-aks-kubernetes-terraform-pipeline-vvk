@@ -110,10 +110,11 @@ stages:
 
 - stage: Docker Build and Push
   jobs:
-    - deployment: DockerBuildPush
-      displayName: DockerBuildPush
+    build:
+      run-on: ubuntu-latest
       steps:
       - task: Docker@2
+        displayName: DockerBuildPush
         inputs:
           containerRegistry: 'acr-aks-base'
           repository: 'nextjs-app1'
