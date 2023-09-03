@@ -32,7 +32,7 @@ stages:
           artifact: 'terraform-manifests-out'
           publishLocation: 'pipeline'
 
-      - task: TerraformInstaller@1
+      - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller@0
         inputs:
           terraformVersion: 'latest'
       
