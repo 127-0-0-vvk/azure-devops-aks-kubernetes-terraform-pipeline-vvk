@@ -107,4 +107,15 @@ stages:
                 environmentServiceNameAzureRM: 'terraform-aks-azurerm-svc-con'
                 commandOptions: '$(Pipeline.Workspace)/terraform-manifests-out/$(DEV_ENVIRONMENT)-$(Build.BuildId).out'
                 allowTelemetryCollection: false
-            
+
+- stage: Docker Build and Push
+  jobs:
+    - deployment: DockerBuildPush
+      displayName: DockerBuildPush
+      steps:
+      - task: Docker@2
+        inputs:
+          containerRegistry: 'acr-aks-base'
+          repository: 'nextjs-app1'
+          command: 'buildAndPush'
+          Dockerfile: '**/Dockerfile'
