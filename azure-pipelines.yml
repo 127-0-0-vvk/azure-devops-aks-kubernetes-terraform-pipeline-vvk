@@ -34,7 +34,7 @@ stages:
 
       - task: TerraformInstaller@0
         inputs:
-          terraformVersion: 'charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller@0'
+          terraformVersion: 'latest'
       
       - task: TerraformTaskV4@4
         inputs:
