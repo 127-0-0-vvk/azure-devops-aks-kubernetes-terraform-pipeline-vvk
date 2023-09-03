@@ -176,7 +176,7 @@ stages:
         inputs:
           SourceFolder: '$(Agent.BuildDirectory)'
           Contents: |
-            **/mhc-aks-yaml
+            **/mhc-aks.yaml
             **/*.dacpac
           TargetFolder: '$(Build.ArtifactStagingDirectory)'
       
