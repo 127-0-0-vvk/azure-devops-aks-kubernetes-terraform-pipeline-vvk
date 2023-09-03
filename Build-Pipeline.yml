@@ -116,7 +116,7 @@ stages:
     steps:
     - task: Docker@2
       inputs:
-        containerRegistry: 'acr-aks-base'
+        containerRegistry: 'acr-nextapp-con'
         repository: 'nextjs-app1'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
