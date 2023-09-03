@@ -32,7 +32,7 @@ stages:
           artifact: 'terraform-manifests-out'
           publishLocation: 'pipeline'
 
-      - task: TerraformInstaller@0
+      - task: TerraformInstaller@1
         inputs:
           terraformVersion: 'latest'
       
