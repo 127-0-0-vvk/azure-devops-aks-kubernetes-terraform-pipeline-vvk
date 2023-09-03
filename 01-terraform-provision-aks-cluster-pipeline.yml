@@ -23,7 +23,9 @@ stages:
           artifact: 'terraform-manifests-out'
           publishLocation: 'pipeline'
       
-      
+      - task: TerraformInstaller@1
+        inputs:
+          terraformVersion: 'latest'
       - task: TerraformTaskV4@4
         displayName: Terraform INIT
         inputs:
@@ -36,12 +38,7 @@ stages:
           backendAzureRmContainerName: 'tfstatefiles'
           backendAzureRmKey: 'aks-base.tfstate'
 
-      - task: TerraformCLI@0
-        inputs:
-          command: 'forceunlock'
-          workingDirectory: '$(System.DefaultWorkingDirectory)/terraform-manifests'
-          allowTelemetryCollection: true
-          lockID: '7b7baf8c-0528-bc03-2201-e9a4d8a7d979'
+
       - task: TerraformTaskV4@4
         displayName: Terraform Validate
         inputs:
