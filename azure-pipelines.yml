@@ -108,15 +108,15 @@ stages:
                 commandOptions: '$(Pipeline.Workspace)/terraform-manifests-out/$(DEV_ENVIRONMENT)-$(Build.BuildId).out'
                 allowTelemetryCollection: false
 
-- stage: Docker Build and Push
-  jobs:
-    build:
-      run-on: ubuntu-latest
-      steps:
-      - task: Docker@2
-        displayName: DockerBuildPush
-        inputs:
-          containerRegistry: 'acr-aks-base'
-          repository: 'nextjs-app1'
-          command: 'buildAndPush'
-          Dockerfile: '**/Dockerfile'
+- stage: Build
+  displayName: Build and push stage
+  jobs:  
+  - job: Build
+    displayName: Build job
+    steps:
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'acr-aks-base'
+        repository: 'nextjs-app1'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
