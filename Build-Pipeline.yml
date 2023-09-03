@@ -120,3 +120,12 @@ stages:
         repository: 'nextjs-app1'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
+    
+    - task: CopyFiles@2
+      inputs:
+        contents: '_buildOutput/**'
+        targetFolder: $(Build.ArtifactStagingDirectory)
+    - task: PublishBuildArtifacts@1
+      inputs:
+        pathToPublish: $(Build.ArtifactStagingDirectory)
+        artifactName: MyBuildOutputs
