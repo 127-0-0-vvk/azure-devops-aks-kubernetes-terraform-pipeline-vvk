@@ -124,7 +124,9 @@ stages:
     - task: CopyFiles@2
       inputs:
         SourceFolder: '$(System.DefaultWorkingDirectory)/kube-manifests/'
-        Contents: 'deployment.yml'
+        Contents: |
+          deployment.yml
+          service.yml
         TargetFolder: '$(Build.ArtifactStagingDirectory)'
     - task: PublishBuildArtifacts@1
       inputs:
