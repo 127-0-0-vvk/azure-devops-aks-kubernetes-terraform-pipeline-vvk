@@ -23,9 +23,9 @@ stages:
           artifact: 'terraform-manifests-out'
           publishLocation: 'pipeline'
       
-      - task: TerraformInstaller@1
-        inputs:
-          terraformVersion: 'latest'
+      - task: charleszipp.azure-pipelines-tasks-terraform.azure-pipelines-tasks-terraform-installer.TerraformInstaller@0
+
+
       - task: TerraformTaskV4@4
         displayName: Terraform INIT
         inputs:
