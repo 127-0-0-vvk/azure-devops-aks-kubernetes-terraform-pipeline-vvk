@@ -8,8 +8,8 @@ Provision AKS Cluster using Azure DevOps Pipeline &amp; Terraform
 
 ## Website Preview
 
+<img width="1800" alt="Website-home" src="https://github.com/127-0-0-vvk/azure-devops-aks-kubernetes-terraform-pipeline-vvk/assets/41470324/30733d7d-39db-40ce-8bc4-688c4891dc1f">
 
-<img width="1800" alt="Website-home" src="https://github.com/127-0-0-vvk/azure-devops-aks-kubernetes-terraform-pipeline-vvk/assets/41470324/de215a40-bf48-4e12-980d-8ee3c46cbf4e">
 
 
 ## Step-01: Introduction
@@ -18,7 +18,8 @@ Provision AKS Cluster using Azure DevOps Pipeline &amp; Terraform
 - Terraform Manifests Validate
 - Provision AKS Cluster
 
-<img width="1800" alt="AKS-workloads" src="https://github.com/127-0-0-vvk/azure-devops-aks-kubernetes-terraform-pipeline-vvk/assets/41470324/7dd4a438-2bec-40c2-be61-c91b3bb162e9">
+<img width="1800" alt="AKS-workloads" src="https://github.com/127-0-0-vvk/azure-devops-aks-kubernetes-terraform-pipeline-vvk/assets/41470324/46468a2b-802e-4135-88fb-93eaed8629c5">
+
 
 ## Step-02: Review Terraform Manifests
 ### 01-main.tf
@@ -68,7 +69,8 @@ Provision AKS Cluster using Azure DevOps Pipeline &amp; Terraform
  - If you need to provision the new nodepool , uncomment all lines except first line and check-in code and new nodepool will be created
  -  Node Lables and Tags will have a environment with respective environment name
 
-<img width="373" alt="Terraform-manifest" src="https://github.com/127-0-0-vvk/azure-devops-aks-kubernetes-terraform-pipeline-vvk/assets/41470324/d299729b-b4e2-4663-83bf-bdcc70dd7aeb">
+<img width="373" alt="Terraform-manifest" src="https://github.com/127-0-0-vvk/azure-devops-aks-kubernetes-terraform-pipeline-vvk/assets/41470324/58e8de90-9f3f-4d0d-adf6-f621a65b2e7f">
+
 
 
 ## Step-04: Create Github Repository
@@ -82,7 +84,8 @@ Provision AKS Cluster using Azure DevOps Pipeline &amp; Terraform
 
 https://github.com/127-0-0-vvk/azure-devops-aks-kubernetes-terraform-pipeline-vvk/
 
-<img width="1800" alt="Github-Repo" src="https://github.com/127-0-0-vvk/azure-devops-aks-kubernetes-terraform-pipeline-vvk/assets/41470324/ea3893bc-3f2a-44d4-8195-d4fcf9790f1a">
+<img width="1800" alt="Github-Repo" src="https://github.com/127-0-0-vvk/azure-devops-aks-kubernetes-terraform-pipeline-vvk/assets/41470324/f9403edf-e093-4645-9cc2-969a0994108f">
+
 
 ## Step-05: Create New Azure DevOps Project for IAC
 - Go to -> Azure DevOps -> Select Organization -> vivekvannavada(Your Orgnaization) ->  Create New Project
@@ -186,13 +189,21 @@ Public File: aks-terraform-devops-ssh-key-ububtu.pub (To be uploaded to Azure De
 ## Step-13: Verify all the resources created 
 ### Verify Pipeline logs
 - Verify Pipeline logs for all the tasks
-- 
-<img width="1036" alt="Build-Pipeline3" src="https://github.com/127-0-0-vvk/azure-devops-aks-kubernetes-terraform-pipeline-vvk/assets/41470324/10af9969-d897-4afb-8fb4-f0481694dad2"><img width="1019" alt="Build-pipeline2" src="https://github.com/127-0-0-vvk/azure-devops-aks-kubernetes-terraform-pipeline-vvk/assets/41470324/b6377dec-4759-4b3d-ac4e-1050267baf51">
+-
+<img width="1800" alt="Build-pipeline" src="https://github.com/127-0-0-vvk/azure-devops-aks-kubernetes-terraform-pipeline-vvk/assets/41470324/8cbb9e30-0f7e-4a97-9909-0ad3925dcd3b">
+
+<img width="1019" alt="Build-pipeline2" src="https://github.com/127-0-0-vvk/azure-devops-aks-kubernetes-terraform-pipeline-vvk/assets/41470324/129ce72b-8be3-4e75-a638-0a57159038af">
+
+<img width="1036" alt="Build-Pipeline3" src="https://github.com/127-0-0-vvk/azure-devops-aks-kubernetes-terraform-pipeline-vvk/assets/41470324/90a4e364-1121-42f3-8c9c-f91a88d91744">
+
 
 ## Step-14: Verify Published Artifacts
 ### Verify Drop Folder and ACR container
 
-<img width="1800" alt="ACR-contatiner" src="https://github.com/127-0-0-vvk/azure-devops-aks-kubernetes-terraform-pipeline-vvk/assets/41470324/db45916d-17ec-422f-b3ed-c10edee3aa54">
+<img width="1800" alt="ACR-contatiner" src="https://github.com/127-0-0-vvk/azure-devops-aks-kubernetes-terraform-pipeline-vvk/assets/41470324/03ceb837-da70-4e21-86f4-06922031d607">
+
+## Setup Service connections for Every Namespace
+<img width="1014" alt="svc-connections" src="https://github.com/127-0-0-vvk/azure-devops-aks-kubernetes-terraform-pipeline-vvk/assets/41470324/c48ec48b-6869-41be-957e-ce9345d6c867">
 
 
 ## Step-15: Release Pipeline - Create Dev Stage
@@ -215,11 +226,10 @@ Public File: aks-terraform-devops-ssh-key-ububtu.pub (To be uploaded to Azure De
 - Click on **SAVE** to save release
 - Comment: Dev k8s Create Secret task added
 
-<img width="1800" alt="pre-approval deployments" src="https://github.com/127-0-0-vvk/azure-devops-aks-kubernetes-terraform-pipeline-vvk/assets/41470324/1e193ca7-2a18-477c-9934-897281a44d96">
+<img width="1800" alt="pre-approval deployments" src="https://github.com/127-0-0-vvk/azure-devops-aks-kubernetes-terraform-pipeline-vvk/assets/41470324/bf11248d-1bdb-4f0a-aeaf-5e3648551462">
 
-## Setup Service connections for Every Namespace
 
-<img width="1014" alt="svc-connections" src="https://github.com/127-0-0-vvk/azure-devops-aks-kubernetes-terraform-pipeline-vvk/assets/41470324/89c20729-1c34-4cdd-864d-7469338ab7ef">
+
 
 ### Add Task: Deploy to Kubernetes
 - Display Name: Deploy to AKS
@@ -238,10 +248,12 @@ Manifest: $(System.DefaultWorkingDirectory)/kube-manifests/Deployment.yml and Se
 - Click on **SAVE** to save release
 - Comment: Dev k8s Deploy task added
 
-<img width="1800" alt="Release-pipeline" src="https://github.com/127-0-0-vvk/azure-devops-aks-kubernetes-terraform-pipeline-vvk/assets/41470324/d519cd02-fa7f-4ddb-bef5-0a4676f7e2b5">
+<img width="1800" alt="Release-pipeline" src="https://github.com/127-0-0-vvk/azure-devops-aks-kubernetes-terraform-pipeline-vvk/assets/41470324/031f8ebc-0b20-4cc9-a876-d6e7e608f066">
+
 
 ## Step-16: View Your Application.
-<img width="1800" alt="Website-home" src="https://github.com/127-0-0-vvk/azure-devops-aks-kubernetes-terraform-pipeline-vvk/assets/41470324/336a37ce-5066-4717-b147-3e4b0890cb69">
+
+<img width="1800" alt="Website-home" src="https://github.com/127-0-0-vvk/azure-devops-aks-kubernetes-terraform-pipeline-vvk/assets/41470324/77688421-d45f-43d0-b358-f062432a60a4">
 
 
-<img width="1800" alt="Website-template" src="https://github.com/127-0-0-vvk/azure-devops-aks-kubernetes-terraform-pipeline-vvk/assets/41470324/0b82dc47-d726-4b9a-ae61-ceb7be6a9a38">
+<img width="1800" alt="Website-template" src="https://github.com/127-0-0-vvk/azure-devops-aks-kubernetes-terraform-pipeline-vvk/assets/41470324/8862df89-17a0-457d-ade3-6057329e56b6">
