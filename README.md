@@ -182,7 +182,7 @@ Public File: aks-terraform-devops-ssh-key-ububtu.pub (To be uploaded to Azure De
 ## Step-3: Terraform Initialize (State Storage to store in Azure Storage Account for Dev AKS Cluster)
 ## Step-4: Terraform Plan (Create Plan)
 ## Step-5: Terraform Apply (Use the plan created in previous step)
-
+```
 ## Step-12: Build And package you Application
 - Using Dockerfile. Copy the file and install dependencies and Push the Artifact to ACR and Drop Folder
 
