@@ -146,6 +146,7 @@ Note: We will have passphrase as : empty when asked
 ls -lrt $HOME/ssh-keys-teerraform-aks-devops
 Private File: aks-terraform-devops-ssh-key-ububtu (To be stored safe with us)
 Public File: aks-terraform-devops-ssh-key-ububtu.pub (To be uploaded to Azure DevOps)
+```
 
 ## Step-09: Upload file to Azure DevOps as Secure File
 - Go to Azure DevOps -> aksdemo2 -> terraform-azure-aks -> Pipelines -> Library
