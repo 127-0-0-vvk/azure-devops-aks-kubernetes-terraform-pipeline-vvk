@@ -33,34 +33,22 @@ Provision AKS Cluster using Azure DevOps Pipeline &amp; Terraform
 
 ### 03-resource-group.tf
 - We are going to create resource groups for each environment with **terraform-aks-envname**
-- Example Name:
-  - terraform-aks-dev
-  - terraform-aks-qa
 
 ### 04-aks-versions-datasource.tf
 - We will get the latest version of AKS using this datasource. 
 - `include_preview = false` will ensure that preview versions are not listed
 
-### 05-log-analytics-workspace.tf
-- Log Analytics workspace will be created per environment. 
-- Example Name:
-  - dev-logs-some-random-petname
-  - qa-logs-some-random-petname
-
-### 06-aks-administrators-azure-ad.tf
+### 05-aks-administrators-azure-ad.tf
 - We are going to create Azure AD Group per environment for AKS Admins
 - To create this group we need to ensure Azure AD Directory Write permission is there for our Service Principal (Service Connection) created in Azure DevOps
 - We will see that in detail in upcoming steps. 
 - VERY VERY IMPORTANT FIX TO MAKE THIS WORK
 
-### 07-aks-cluster.tf
+### 06-aks-cluster.tf
 - Name of the AKS Cluster going to be **ResourceGroupName-Cluster**
-- Example Names:
-  - terraform-aks-dev-cluster
-  - terraform-aks-qa-cluster
 -  Node Lables and Tags will have a environment with respective environment name  
 
-### 08-outputs.tf  
+### 07-outputs.tf  
 - We will put out output values very simple
 - Resource Group 
   - Location
@@ -76,7 +64,7 @@ Provision AKS Cluster using Azure DevOps Pipeline &amp; Terraform
   - ID
   - Object ID
  
- ### 09-aks-cluster-linux-user-nodepools.tf
+ ### 08-aks-cluster-linux-user-nodepools.tf
  - We will comment this file and leave it that way.
  - If you need to provision the new nodepool , uncomment all lines except first line and check-in code and new nodepool will be created
  -  Node Lables and Tags will have a environment with respective environment name
@@ -92,6 +80,8 @@ Provision AKS Cluster using Azure DevOps Pipeline &amp; Terraform
 - Descritpion: Provision AKS Cluster using Azure DevOps Pipelines
 - Repository Type: Public or Private (Your Choice)
 - Click on **Create Repository**
+
+https://github.com/127-0-0-vvk/azure-devops-aks-kubernetes-terraform-pipeline-vvk/
 
 <img width="1800" alt="Github-Repo" src="https://github.com/127-0-0-vvk/azure-devops-aks-kubernetes-terraform-pipeline-vvk/assets/41470324/ea3893bc-3f2a-44d4-8195-d4fcf9790f1a">
 
@@ -157,7 +147,7 @@ Public File: aks-terraform-devops-ssh-key-ububtu.pub (To be uploaded to Azure De
 ```
 
 ## Step-09: Upload file to Azure DevOps as Secure File
-- Go to Azure DevOps -> aksdemo2 -> terraform-azure-aks -> Pipelines -> Library
+- Go to Azure DevOps -> (organization name) -> terraform-azure-aks..etc -> Pipelines -> Library
 - Secure File -> Upload file named **aks-terraform-devops-ssh-key-ububtu.pub**
 - Open the file and click on **Pipeline permissions -> Authorize for use in all pipelines**
 - Click on **SAVE**
@@ -197,20 +187,23 @@ Public File: aks-terraform-devops-ssh-key-ububtu.pub (To be uploaded to Azure De
 ## Step-13: Verify all the resources created 
 ### Verify Pipeline logs
 - Verify Pipeline logs for all the tasks
+- 
 <img width="1036" alt="Build-Pipeline3" src="https://github.com/127-0-0-vvk/azure-devops-aks-kubernetes-terraform-pipeline-vvk/assets/41470324/10af9969-d897-4afb-8fb4-f0481694dad2"><img width="1019" alt="Build-pipeline2" src="https://github.com/127-0-0-vvk/azure-devops-aks-kubernetes-terraform-pipeline-vvk/assets/41470324/b6377dec-4759-4b3d-ac4e-1050267baf51">
 
 ## Step-14: Verify Published Artifacts
 ### Verify Drop Folder and ACR container
+
 <img width="1800" alt="ACR-contatiner" src="https://github.com/127-0-0-vvk/azure-devops-aks-kubernetes-terraform-pipeline-vvk/assets/41470324/db45916d-17ec-422f-b3ed-c10edee3aa54">
 
 
 ## Step-15: Release Pipeline - Create Dev Stage
 - Go to Pipelines -> Releases
 - Create new **Release Pipeline**
-### Create Dev QA and Prod
+### Create Dev, QA and Prod
 - Stage Name: Dev
 - Create Task 
 - Agent Job: Change to Ubunut Linux (latest)
+- 
 ### Add Task: Create Secret
 - Display Name: Create Secret to allow image pull from ACR
 - Action: create secret
@@ -232,10 +225,10 @@ Public File: aks-terraform-devops-ssh-key-ububtu.pub (To be uploaded to Azure De
 ### Add Task: Deploy to Kubernetes
 - Display Name: Deploy to AKS
 - Action: deploy
-- Kubernetes Service Connection: dev-ns-k8s-aks-svc-conn
+- Kubernetes Service Connection: aks-nextapp-dev-svc-con
 - Namespace: dev
 - Strategy: None
-- Manifest: Select 01-Deployment-and-LoadBalancer-Service.yml  from build artifacts
+- Manifest: Select 01-Deployment.yml and Service.yml  from build artifacts
 ```
 # Sample Value for Manifest after adding it
 Manifest: $(System.DefaultWorkingDirectory)/kube-manifests/Deployment.yml and Service.yml
