@@ -5,7 +5,7 @@ Provision AKS Cluster using Azure DevOps Pipeline &amp; Terraform
 
 <img width="8032" alt="Project Flow Diagram" src="https://github.com/127-0-0-vvk/azure-devops-aks-kubernetes-terraform-pipeline-vvk/assets/41470324/75be1790-caa6-4782-a7aa-114ae9848002">
 
-## Website Preiview
+## Website Preview
 
 
 <img width="1800" alt="Website-home" src="https://github.com/127-0-0-vvk/azure-devops-aks-kubernetes-terraform-pipeline-vvk/assets/41470324/de215a40-bf48-4e12-980d-8ee3c46cbf4e">
