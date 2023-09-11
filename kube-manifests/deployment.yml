@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: nextjs-container
-        image: acrrg01.azurecr.io/nextjs-app1:$(Build.BuildId)
+        image: acrrg0102.azurecr.io/nextjs-app1:latest
         ports:
         - containerPort: 3000
