@@ -5,6 +5,7 @@ export default function Tickets() {
     <main>
         <h2>Tickets</h2>
         <h3>View Tickets</h3>
+        <p>Change is not here</p>
     </main>
   )
 }
