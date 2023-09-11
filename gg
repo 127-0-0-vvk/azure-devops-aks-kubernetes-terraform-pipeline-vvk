@@ -14,7 +14,7 @@ variables:
   value: dev
 
 
-# Stage-1: Terraform Validate Stage
+# Stage-1: Terraform Validate Stage yes
 ## Step-1: Publish Artifacts to Pipeline (Pipeline artifacts provide a way to share files between stages in a pipeline or between different pipelines. )
 ## Step-2: Install Latest Terraform (0.13.5) (Ideally not needed if we use default Ubuntu Agents)
 ## Step-3: Validate Terraform Manifests (terraform init, terraform validate)
